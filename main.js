@@ -15,11 +15,12 @@ btnSimpan.addEventListener("click", function () {
     let todoHTML = todoContainer.innerHTML;
     console.log(todoHTML);
     todoHTML += `
-        <li class="list-group-item">
-            <input class="form-check-input me-1" type="checkbox" />
-            <label class="form-check-label" for="firstCheckbox"
-              ><span>${todoName.value}</span></label
-            >
+        <li class="list-group-item d-flex justify-content-between">
+            <div>
+                <input class="form-check-input me-1" type="checkbox" />
+                <span>${todoName.value}</span>  
+            </div>
+                <button class="bagde border-0 rounded bg-danger btn-hapus text-light">X</button>
         </li>
     `;
     todoContainer.innerHTML = todoHTML; // manipulasi listStyle li untuk dimasukkan ke ul
@@ -39,7 +40,19 @@ btnSimpan.addEventListener("click", function () {
       input.addEventListener("change", function () {
         let valueSpan = input.nextElementSibling; // cari element span menggunakan nextElementSibling yang ada di v-input
         console.log(valueSpan);
-        valueSpan.classList.toggle("text-decoration-line-through");
+        valueSpan.classList.toggle("text-decoration-line-through"); // untuk menambah atau menghapus class text-decoration-line-through ke elemen span.
+      });
+    }
+
+    // memanggil class button hapus
+    let btnHapus = document.querySelectorAll(".btn-hapus");
+    for (let x = 0; x < btnHapus.length; x++) {
+      const hapus = btnHapus[x];
+
+      // ketikan button hapus di click
+      hapus.addEventListener("click", function () {
+        // maka hapus parent element ul nya yaitu pembungkus dari li, input dan button
+        this.parentElement.remove();
       });
     }
   }
